@@ -1,0 +1,151 @@
+/* ==================== LIGHT THEME ==================== */
+.light-theme {
+    --mica: rgba(240, 240, 240, 0.85);
+    --mica-light: rgba(0, 0, 0, 0.05);
+    --mica-border: rgba(0, 0, 0, 0.1);
+    --text-primary: rgba(0, 0, 0, 0.9);
+    --text-secondary: rgba(0, 0, 0, 0.7);
+    --bg-hover: rgba(0, 0, 0, 0.05);
+    --bg-selected: rgba(var(--accent-rgb), 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    color-scheme: light;
+}
+
+.light-theme body {
+    color: var(--text-primary);
+    background: #f0f0f0;
+}
+
+.light-theme .window {
+    background: var(--mica);
+}
+
+.light-theme .window-titlebar {
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+}
+
+.light-theme .window-content {
+    background: rgba(255, 255, 255, 0.25);
+    color: black;
+}
+
+.light-theme .window-controls button {
+    color: black;
+}
+
+.light-theme .window-controls button:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .start-button {
+    background: rgba(0, 0, 0, 0.05);
+    color: black;
+}
+
+.light-theme .start-button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .taskbar-search {
+    background: rgba(0, 0, 0, 0.05);
+    color: black;
+}
+
+.light-theme .running-app-item {
+    color: black;
+}
+
+.light-theme .running-app-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .tray-item {
+    color: black;
+}
+
+.light-theme .tray-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .system-tray {
+    border-left-color: rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .start-menu {
+    color: black;
+    background: var(--mica);
+}
+
+.light-theme .start-menu input {
+    background: rgba(0, 0, 0, 0.05);
+    color: black;
+}
+
+.light-theme .start-menu input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.light-theme .start-menu-item {
+    background: rgba(0, 0, 0, 0.03);
+    color: black;
+}
+
+.light-theme .start-menu-item:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.light-theme .power-options button {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.light-theme .user-actions button {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.light-theme .desktop-icon:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .desktop-icon.selected {
+    background: rgba(var(--accent-rgb), 0.1);
+}
+
+.light-theme .context-menu {
+    background: var(--mica);
+    color: black;
+}
+
+.light-theme .context-menu-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .notification {
+    background: var(--mica);
+    color: black;
+}
+
+.light-theme .desktop-line {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.light-theme .show-desktop:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Scrollbars for light theme */
+.light-theme ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.light-theme ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
