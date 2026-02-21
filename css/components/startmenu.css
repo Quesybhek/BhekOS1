@@ -1,0 +1,634 @@
+/* ==================== START MENU STYLES ==================== */
+.start-menu {
+    position: absolute;
+    bottom: var(--taskbar-height);
+    left: 0;
+    width: 640px;
+    height: 720px;
+    background: var(--mica);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--mica-border);
+    border-radius: 12px 12px 0 0;
+    display: none;
+    flex-direction: column;
+    z-index: 9999;
+    overflow: hidden;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4);
+    animation: startMenuOpen 0.3s var(--transition);
+}
+
+.start-menu.open {
+    display: flex;
+}
+
+/* Start Menu Header */
+.start-menu-header {
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.2), rgba(0, 0, 0, 0.3));
+    border-bottom: 1px solid var(--mica-border);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.user-profile:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #9c27b0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    position: relative;
+}
+
+.user-status-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--mica);
+}
+
+.user-status-badge.online {
+    background: #4CAF50;
+}
+
+.user-status-badge.away {
+    background: #FF9800;
+}
+
+.user-status-badge.busy {
+    background: #FF5252;
+}
+
+.user-info h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.user-info p {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* Start Menu Search */
+.start-menu-search {
+    margin: 16px 24px;
+    position: relative;
+}
+
+.start-menu-search input {
+    width: 100%;
+    padding: 12px 16px 12px 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--mica-border);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.start-menu-search input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.start-menu-search .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+/* Start Menu Sections */
+.start-menu-sections {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px;
+}
+
+.start-menu-section {
+    margin-bottom: 24px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 0 8px;
+}
+
+.section-header h4 {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.section-header button {
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.section-header button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Pinned Apps Grid */
+.pinned-apps-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+}
+
+.start-menu-item {
+    padding: 12px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.start-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.start-menu-item .item-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--accent-rgb), 0.2);
+    border-radius: 8px;
+}
+
+.start-menu-item .item-name {
+    font-size: 12px;
+    line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.start-menu-item .item-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 6px;
+    height: 6px;
+    background: #ff5252;
+    border-radius: 50%;
+}
+
+/* Recommended Section */
+.recommended-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.recommended-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.recommended-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.recommended-item .item-icon {
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+.recommended-item .item-info {
+    flex: 1;
+}
+
+.recommended-item .item-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.recommended-item .item-description {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.recommended-item .item-time {
+    font-size: 11px;
+    opacity: 0.5;
+    margin-left: auto;
+}
+
+/* All Apps List */
+.all-apps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.all-apps-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.all-apps-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.all-apps-item .item-icon {
+    font-size: 18px;
+    width: 28px;
+    text-align: center;
+}
+
+.all-apps-item .item-name {
+    flex: 1;
+    font-size: 13px;
+}
+
+.all-apps-item .item-letter {
+    font-size: 12px;
+    opacity: 0.5;
+    width: 20px;
+    text-align: right;
+}
+
+/* Alphabet Jump */
+.alphabet-jump {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    opacity: 0.5;
+}
+
+.alphabet-jump span {
+    cursor: pointer;
+    padding: 2px;
+}
+
+.alphabet-jump span:hover {
+    opacity: 1;
+    color: var(--accent);
+}
+
+/* Power Menu */
+.start-menu-footer {
+    margin-top: auto;
+    padding: 16px 24px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--mica-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.power-options {
+    display: flex;
+    gap: 8px;
+}
+
+.power-options button {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--mica-border);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.power-options button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.power-options button.shutdown:hover {
+    background: #ff5252;
+    border-color: #ff5252;
+}
+
+.power-menu {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: var(--mica);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--mica-border);
+    border-radius: 8px;
+    min-width: 200px;
+    margin-bottom: 8px;
+    display: none;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+.power-options:hover .power-menu {
+    display: block;
+}
+
+.power-menu-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.power-menu-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.power-menu-item:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.power-menu-item:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.power-menu-item.shutdown:hover {
+    background: #ff5252;
+}
+
+/* User Actions */
+.user-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.user-actions button {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--mica-border);
+    border-radius: 6px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.user-actions button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* User Switcher in Start Menu */
+.user-switcher {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: var(--mica);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--mica-border);
+    border-radius: 8px;
+    min-width: 250px;
+    margin-bottom: 8px;
+    display: none;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+.user-profile:hover .user-switcher {
+    display: block;
+}
+
+.user-switcher-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.user-switcher-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.user-switcher-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.user-switcher-info {
+    flex: 1;
+}
+
+.user-switcher-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.user-switcher-status {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+/* Recent Activities */
+.recent-activities {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.activity-item:hover {
+    opacity: 1;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+}
+
+.activity-icon {
+    font-size: 12px;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes startMenuOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes startMenuClose {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+}
+
+/* ==================== LIGHT THEME ADJUSTMENTS ==================== */
+.light-theme .start-menu {
+    color: black;
+}
+
+.light-theme .start-menu-search input {
+    background: rgba(0, 0, 0, 0.05);
+    color: black;
+}
+
+.light-theme .start-menu-search input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.light-theme .start-menu-item {
+    background: rgba(0, 0, 0, 0.03);
+    color: black;
+}
+
+.light-theme .start-menu-item:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.light-theme .recommended-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .power-options button {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.light-theme .user-actions button {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.light-theme .power-menu-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .start-menu {
+        width: 100vw;
+        height: 80vh;
+        left: 0;
+    }
+    
+    .pinned-apps-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .start-menu-header {
+        padding: 16px;
+    }
+    
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .user-info h3 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pinned-apps-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .start-menu-footer {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+    
+    .user-actions {
+        justify-content: center;
+    }
+}

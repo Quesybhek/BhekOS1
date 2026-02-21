@@ -1,0 +1,444 @@
+/* ==================== DESKTOP SWITCHER / TASK VIEW ==================== */
+.desktop-switcher {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    max-width: 90vw;
+    background: var(--mica);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--mica-border);
+    border-radius: 12px;
+    padding: 24px;
+    z-index: 10000;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    animation: switcherOpen 0.3s var(--transition);
+}
+
+@keyframes switcherOpen {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.switcher-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--mica-border);
+}
+
+.switcher-header h2 {
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.switcher-header h2 span {
+    font-size: 24px;
+}
+
+.switcher-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switcher-close:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Desktops Grid */
+.desktops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+.desktop-thumbnail {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.desktop-thumbnail:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+.desktop-thumbnail.current {
+    border-color: var(--accent);
+    background: rgba(var(--accent-rgb), 0.1);
+}
+
+.desktop-thumbnail.dragover {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.thumbnail-preview {
+    height: 150px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.thumbnail-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+.preview-window {
+    width: 40px;
+    height: 30px;
+    background: var(--mica);
+    border: 1px solid var(--mica-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.preview-window.multiple {
+    position: relative;
+}
+
+.preview-window.multiple::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    opacity: 0.5;
+}
+
+.thumbnail-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.thumbnail-name input {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--mica-border);
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+    font-size: 14px;
+    width: 120px;
+}
+
+.thumbnail-name input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.thumbnail-count {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 8px;
+}
+
+.thumbnail-actions {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.desktop-thumbnail:hover .thumbnail-actions {
+    opacity: 1;
+}
+
+.thumbnail-action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.thumbnail-action-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.thumbnail-action-btn.delete:hover {
+    background: #ff5252;
+}
+
+/* Windows in Desktop */
+.desktop-windows-list {
+    margin-top: 12px;
+    font-size: 11px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.desktop-window-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: move;
+}
+
+.desktop-window-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.desktop-window-item.dragging {
+    opacity: 0.5;
+}
+
+.window-item-icon {
+    font-size: 12px;
+    width: 16px;
+}
+
+.window-item-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.window-item-close {
+    opacity: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.desktop-window-item:hover .window-item-close {
+    opacity: 1;
+}
+
+.window-item-close:hover {
+    background: #ff5252;
+}
+
+/* Switcher Footer */
+.switcher-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--mica-border);
+}
+
+.switcher-footer-left {
+    display: flex;
+    gap: 8px;
+}
+
+.switcher-footer-right {
+    display: flex;
+    gap: 8px;
+}
+
+.switcher-btn {
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--mica-border);
+    border-radius: 6px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.switcher-btn:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+.switcher-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.switcher-btn.primary:hover {
+    background: var(--accent-hover);
+}
+
+/* Desktop Settings */
+.desktop-settings {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 8px;
+}
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.setting-label {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.setting-value {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Keyboard Shortcuts Hint */
+.switcher-hint {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 11px;
+    opacity: 0.5;
+    display: flex;
+    gap: 12px;
+}
+
+.hint-key {
+    background: rgba(255,255,255,0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes windowMove {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.window-moving {
+    animation: windowMove 0.3s ease;
+}
+
+/* ==================== LIGHT THEME ADJUSTMENTS ==================== */
+.light-theme .desktop-thumbnail {
+    background: rgba(0,0,0,0.03);
+}
+
+.light-theme .desktop-thumbnail:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.light-theme .thumbnail-name input {
+    background: rgba(0,0,0,0.05);
+    color: black;
+}
+
+.light-theme .thumbnail-action-btn {
+    color: black;
+}
+
+.light-theme .switcher-btn {
+    color: black;
+}
+
+.light-theme .switcher-close {
+    color: black;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .desktop-switcher {
+        width: 95vw;
+        padding: 16px;
+    }
+    
+    .desktops-grid {
+        grid-template-columns: 1fr;
+        max-height: 60vh;
+    }
+    
+    .switcher-footer {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .switcher-footer-left,
+    .switcher-footer-right {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .switcher-hint {
+        display: none;
+    }
+}

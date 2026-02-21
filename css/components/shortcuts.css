@@ -1,0 +1,341 @@
+/* ==================== KEYBOARD SHORTCUTS UI ==================== */
+
+/* Window Switcher (Alt+Tab) */
+.window-switcher {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--mica);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--mica-border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+    z-index: 100000;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    animation: switcherAppear 0.2s ease;
+    max-width: 90vw;
+    overflow-x: auto;
+}
+
+@keyframes switcherAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.switcher-item {
+    text-align: center;
+    padding: 16px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    min-width: 120px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.switcher-item:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.switcher-item.selected {
+    background: rgba(var(--accent-rgb), 0.2);
+    border-color: var(--accent);
+    transform: scale(1.05);
+}
+
+.switcher-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    margin: 0 auto 12px;
+}
+
+.switcher-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.switcher-app {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+/* Windows Key Menu */
+.win-key-menu {
+    position: fixed;
+    bottom: var(--taskbar-height);
+    left: 0;
+    background: var(--mica);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--mica-border);
+    border-radius: 12px;
+    padding: 16px;
+    z-index: 100000;
+    animation: menuSlide 0.2s ease;
+    min-width: 300px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+@keyframes menuSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.win-menu-header {
+    padding: 8px 12px;
+    font-size: 12px;
+    opacity: 0.7;
+    border-bottom: 1px solid var(--mica-border);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.win-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.win-menu-item {
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s;
+}
+
+.win-menu-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.win-menu-item .item-icon {
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--accent-rgb), 0.2);
+    border-radius: 6px;
+}
+
+.win-menu-item .item-shortcut {
+    margin-left: auto;
+    font-size: 11px;
+    opacity: 0.5;
+    font-family: monospace;
+}
+
+/* Shortcut Hint Overlay */
+.shortcut-hint {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--mica-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: white;
+    font-size: 13px;
+    z-index: 10000;
+    animation: hintFade 0.3s;
+    max-width: 300px;
+}
+
+@keyframes hintFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hint-title {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hint-key {
+    background: rgba(255,255,255,0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 11px;
+}
+
+.hint-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hint-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding: 4px 0;
+}
+
+.hint-keys {
+    display: flex;
+    gap: 4px;
+}
+
+/* Shortcuts Settings Panel */
+.shortcuts-panel {
+    padding: 20px;
+}
+
+.shortcuts-category {
+    margin-bottom: 24px;
+}
+
+.shortcuts-category h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--mica-border);
+}
+
+.shortcut-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.shortcut-item:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.shortcut-info {
+    flex: 1;
+}
+
+.shortcut-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.shortcut-description {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.shortcut-keys {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.shortcut-key {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--mica-border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-family: monospace;
+    min-width: 30px;
+    text-align: center;
+}
+
+.shortcut-edit {
+    margin-left: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.shortcut-item:hover .shortcut-edit {
+    opacity: 1;
+}
+
+.shortcut-edit-btn {
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+}
+
+/* Shortcut Recorder */
+.shortcut-recorder {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--mica-border);
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.recorder-key {
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-family: monospace;
+}
+
+.recorder-prompt {
+    color: var(--accent);
+    animation: pulse 1s infinite;
+}
+
+/* ==================== LIGHT THEME ADJUSTMENTS ==================== */
+.light-theme .switcher-item {
+    color: black;
+}
+
+.light-theme .switcher-item:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.light-theme .win-menu-item {
+    color: black;
+}
+
+.light-theme .shortcut-key {
+    background: rgba(0,0,0,0.05);
+    color: black;
+}
+
+.light-theme .shortcut-item:hover {
+    background: rgba(0,0,0,0.02);
+}

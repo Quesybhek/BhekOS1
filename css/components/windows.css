@@ -1,0 +1,366 @@
+/* ==================== WINDOW STYLES ==================== */
+.window {
+    position: absolute;
+    background: var(--mica);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--mica-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transform: translateZ(0);
+    animation: windowOpen var(--animation-duration) var(--transition);
+    min-width: 300px;
+    min-height: 200px;
+    transition: box-shadow 0.2s, border-color 0.2s, border-radius 0.2s;
+    will-change: left, top, width, height;
+}
+
+.window.focused {
+    box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 0 2px var(--accent);
+    border-color: var(--accent);
+    z-index: 1000;
+}
+
+.window.dragging {
+    opacity: 0.95;
+    cursor: grabbing;
+    transition: none;
+}
+
+.window.resizing {
+    transition: none;
+    cursor: nwse-resize;
+}
+
+.window.maximized {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+
+.window.minimized {
+    display: none;
+}
+
+/* ==================== WINDOW TITLEBAR ==================== */
+.window-titlebar {
+    height: var(--titlebar-height);
+    padding: 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
+    font-size: 13px;
+    font-weight: 500;
+    background: rgba(0,0,0,0.3);
+    border-bottom: 1px solid var(--mica-border);
+    border-radius: 12px 12px 0 0;
+    -webkit-app-region: drag;
+}
+
+.window.dragging .window-titlebar {
+    cursor: grabbing;
+}
+
+.window-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    flex: 1;
+}
+
+.window-icon {
+    font-size: 18px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.window-title-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+/* ==================== WINDOW CONTROLS ==================== */
+.window-controls {
+    display: flex;
+    gap: 8px;
+    -webkit-app-region: no-drag;
+}
+
+.window-controls button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.2s;
+    padding: 0;
+}
+
+.window-controls button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.window-controls .window-close:hover {
+    background: #c42b1c;
+    color: white;
+}
+
+/* Windows style controls */
+.window-controls.windows-style button {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.window-controls.windows-style .window-minimize {
+    font-size: 18px;
+}
+
+.window-controls.windows-style .window-maximize {
+    font-size: 14px;
+}
+
+/* macOS style controls */
+.window-controls.mac-style button {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 0;
+}
+
+.window-controls.mac-style .window-minimize {
+    background: #f5b642;
+}
+
+.window-controls.mac-style .window-maximize {
+    background: #35cd4b;
+}
+
+.window-controls.mac-style .window-close {
+    background: #ed5f5d;
+}
+
+.window-controls.mac-style button:hover {
+    filter: brightness(1.1);
+}
+
+/* ==================== WINDOW CONTENT ==================== */
+.window-content {
+    flex: 1;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.25);
+    overflow: auto;
+    border-radius: 0 0 12px 12px;
+}
+
+.window-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.window-content::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+
+.window-content::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+
+/* ==================== RESIZE HANDLE ==================== */
+.window-resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    cursor: nwse-resize;
+    z-index: 100;
+}
+
+.window-resize-handle::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ==================== WINDOW STATES ==================== */
+.window-snap-left {
+    width: 50vw !important;
+    height: 100vh !important;
+    left: 0 !important;
+    top: 0 !important;
+    border-radius: 0 !important;
+}
+
+.window-snap-right {
+    width: 50vw !important;
+    height: 100vh !important;
+    left: 50vw !important;
+    top: 0 !important;
+    border-radius: 0 !important;
+}
+
+.window-snap-top {
+    width: 100vw !important;
+    height: 50vh !important;
+    left: 0 !important;
+    top: 0 !important;
+    border-radius: 0 !important;
+}
+
+.window-snap-bottom {
+    width: 100vw !important;
+    height: 50vh !important;
+    left: 0 !important;
+    top: 50vh !important;
+    border-radius: 0 !important;
+}
+
+.window-snap-corner {
+    width: 50vw !important;
+    height: 50vh !important;
+}
+
+/* ==================== WINDOW COLLABORATION ==================== */
+.window-collaborators {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    display: flex;
+    gap: 4px;
+    z-index: 1000;
+}
+
+.window-collaborator {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid white;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.window-cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-left: 2px solid;
+    border-top: 2px solid;
+    transform: rotate(-45deg);
+    pointer-events: none;
+    z-index: 10000;
+    animation: cursorBlink 1s step-end infinite;
+}
+
+.window-cursor-label {
+    position: absolute;
+    left: 15px;
+    top: -15px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+/* ==================== WINDOW TOOLBAR ==================== */
+.window-toolbar {
+    height: 36px;
+    padding: 0 12px;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--mica-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.window-toolbar-btn {
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.window-toolbar-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.window-toolbar-btn.active {
+    background: var(--accent);
+}
+
+.window-toolbar-separator {
+    width: 1px;
+    height: 20px;
+    background: var(--mica-border);
+    margin: 0 4px;
+}
+
+/* ==================== WINDOW STATUS BAR ==================== */
+.window-statusbar {
+    height: 28px;
+    padding: 0 12px;
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid var(--mica-border);
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    opacity: 0.7;
+    gap: 16px;
+}
+
+/* ==================== LIGHT THEME ADJUSTMENTS ==================== */
+.light-theme .window-titlebar {
+    background: rgba(255,255,255,0.3);
+    color: black;
+}
+
+.light-theme .window-controls button {
+    color: black;
+}
+
+.light-theme .window-controls button:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.light-theme .window-content {
+    background: rgba(255,255,255,0.25);
+    color: black;
+}
+
+.light-theme .window-toolbar {
+    background: rgba(255,255,255,0.2);
+}
+
+.light-theme .window-toolbar-btn {
+    color: black;
+}
+
+.light-theme .window-statusbar {
+    background: rgba(255,255,255,0.2);
+    color: black;
+}
