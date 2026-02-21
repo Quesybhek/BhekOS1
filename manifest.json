@@ -1,0 +1,60 @@
+{
+  "name": "BhekOS 6.0 - Collaborative Cloud OS",
+  "short_name": "BhekOS",
+  "description": "Complete web-based operating system with collaboration features",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#0078d4",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities", "communication"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "shortcuts": [
+    {
+      "name": "File Explorer",
+      "short_name": "Files",
+      "description": "Browse and manage files",
+      "url": "/?app=file-explorer",
+      "icons": [{ "src": "icons/shortcut-files.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Settings",
+      "short_name": "Settings",
+      "description": "System settings",
+      "url": "/?app=settings",
+      "icons": [{ "src": "icons/shortcut-settings.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Chat",
+      "short_name": "Chat",
+      "description": "Team collaboration",
+      "url": "/?app=chat",
+      "icons": [{ "src": "icons/shortcut-chat.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Users",
+      "short_name": "Users",
+      "description": "User management",
+      "url": "/?app=users",
+      "icons": [{ "src": "icons/shortcut-users.png", "sizes": "192x192" }]
+    }
+  ]
+}
